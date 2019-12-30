@@ -7,6 +7,20 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
+## How to Use
+- Clone this repo
+- run composer install
+- setting .env
+- php artisan key:generate
+- php artisan migrate
+- php artisan db:seed
+
+## Default Login
+- username : admin@brilliansolution.com
+- password : Bismillah
+
+Dont forget to visit [my website](http://brilliansolution.com). Thanks a lot.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
