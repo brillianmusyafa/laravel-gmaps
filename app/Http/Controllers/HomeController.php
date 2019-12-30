@@ -41,6 +41,7 @@ class HomeController extends Controller
         }
         
         $grafik = $this->chart_kategory();
+        // dd($grafik);
         $kategoryCount = $this->getKategoriCount();
         $kat = Kategory::pluck('name','id');
         return view('home',compact('data','kat','grafik','kategoryCount','document'));
@@ -65,28 +66,32 @@ class HomeController extends Controller
 
     public function chart_kategory($value='')
     {
+        $grafik = [];
         $data = DB::table('kategories')
             ->select('kategories.id','kategories.name',DB::raw("count(maps.id) as jml"))
             ->join('maps','maps.kategory_id','=','kategories.id')
             ->groupBy('kategories.id','kategories.name')
             ->get();
 
-        // return $data;
         foreach ($data as $key => $value) {
-            $grafik['labels'][] = $value->name;
-            $grafik['data'][] = $value->jml;
-            $r = rand(0,255);
-            $g = rand(0,255);
-            $b = rand(0,255);
-            $grafik['backgroundColor'][] = "rgba($r,$g,$b,1)";
+        $grafik['labels'][] = $value->name;
+        $grafik['data'][] = $value->jml;
+        $r = rand(0,255);
+        $g = rand(0,255);
+        $b = rand(0,255);
+        $grafik['backgroundColor'][] = "rgba($r,$g,$b,1)";
         }
-        // return $grafik;
-        return [
+        if(count($data)==0){
+            return [];
+        }
+        else{
+            return [
             'labels'=>json_encode($grafik['labels'],true),
             'data'=>json_encode($grafik['data']),
             'backgroundColor'=>json_encode($grafik['backgroundColor'],true),
             'borderColor'=>json_encode($grafik['backgroundColor'],true)
-        ];
+            ];
+        }
     }
 
     public function getKategoriCount($kat_id='')

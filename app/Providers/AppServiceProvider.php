@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if(Schema::hasTable('setting')){
+        if(Schema::hasTable('settings')){
             view()->share('app_name', $this->getSetting('app_name'));
             view()->share('latitude_centre', $this->getSetting('latitude_centre'));
             view()->share('longitude_centre', $this->getSetting('longitude_centre'));
@@ -42,7 +42,10 @@ class AppServiceProvider extends ServiceProvider
     public function getSetting($setting_name)
     {
         $data = Setting::where('setting_name',$setting_name)->first();
-
-        return $data->setting_value;
+        if($data==null){
+            return null;
+        }else{
+               return $data->setting_value;
+        }
     }
 }

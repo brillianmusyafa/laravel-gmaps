@@ -69,7 +69,7 @@
 <script>
     var map = new GMaps({
       el: '#map',
-      zoom: '13',
+      zoom: {{ $set_zoom }},
       lat: '{{ $latitude_centre }}',
       lng: '{{ $longitude_centre }}'
   });
@@ -89,6 +89,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script type="text/javascript">
     var ctx = document.getElementById("myChart").getContext('2d');
+    @if($grafik!=null)
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -111,5 +112,6 @@
             }
         }
     });
+    @endif
 </script>
 @endpush
