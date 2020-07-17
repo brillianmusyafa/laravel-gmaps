@@ -63,9 +63,9 @@
 <script>
     var map = new GMaps({
       el: '#map',
-      zoom: 10,
-      lat: -7.5812427,
-      lng: 111.9081293,
+      zoom: {{$set_zoom}},
+      lat: {{$latitude_centre}},
+      lng: {{$longitude_centre}},
       click: function(e) {
         // alert('click');
         var latLng = e.latLng;
@@ -87,5 +87,16 @@
 
     },
 });
+
+@isset($map)
+map.addMarker({
+    lat: {{$map->lat}},
+    lng: {{$map->long}},
+    title: 'Create Here',
+    click: function(e) {
+        alert('You clicked in this marker');
+    }
+});
+@endisset
 </script>
 @endpush

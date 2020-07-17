@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use View;
+use DB;
 use App\Setting;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
             view()->share('set_zoom', $this->getSetting('set_zoom'));
             view()->share('gmaps_api_key', $this->getSetting('gmaps_api_key'));
         }
+
         Schema::defaultStringLength(191);
     }
 
